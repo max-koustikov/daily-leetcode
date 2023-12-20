@@ -1,0 +1,27 @@
+name: Daily LeetCode Question
+
+on:
+  schedule:
+    - cron: '0 7 * * *'  # Runs at 07:00 UTC every day
+
+jobs:
+  send_question:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        pip install requests beautifulsoup4
+
+    - name: Run the script
+      run: python leetcode_emailer.py
+      env:
+        EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
