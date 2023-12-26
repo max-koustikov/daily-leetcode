@@ -3,7 +3,7 @@ from email.mime.text import MIMEText
 from datetime import datetime, timedelta
 
 # Email Credentials and Content (will be provided as secrets in GitHub Actions)
-sender_email = secrets.EMAIL_ADDRESS  # Replace with your email address
+sender_email = "your_email@gmail.com"  # Replace with your email address
 password = "your_app_password"  # Replace with your app password
 recipient_email = "recipient_email@example.com"  # Replace with recipient email
 subject = "Automated Email from Python"
@@ -30,4 +30,3 @@ if target_time - now <= timedelta(seconds=60):
     print("Email sent successfully at 8:30 PM!")
 else:
     print("Not the designated time to send the email. Current time:", now)
-
