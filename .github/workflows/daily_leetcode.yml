@@ -2,21 +2,26 @@ name: Send Email Every Minute
 
 on:
   schedule:
-    - cron: '* * * * *'  # Run every minute
+    - cron: '*/1 * * * *'
 
 jobs:
   send_email:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
-      - name: Install dependencies
-        run: pip install -r requirements.txt  # If you have any external dependencies
-      - name: Send email
-        run: python send_email.py
-        env:
-          EMAIL_ADDRESS: ${{ secrets.EMAIL_ADDRESS }}
-          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
-          RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        pip install smtplib
+
+    - name: Run email script
+      run: python your_script_name.py
+      env:
+        EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
