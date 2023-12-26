@@ -1,17 +1,23 @@
 import smtplib
 from email.mime.text import MIMEText
-from datetime import datetime
+from datetime import datetime, timedelta
+import os
 
-# Email credentials and content (will be provided as secrets in GitHub Actions)
-sender_email = "your_email@gmail.com"
-password = "your_app_password"
-recipient_email = "recipient_email@example.com"
+password = os.environ.get('EMAIL_PASSWORD')  # Use environment variable for password
+
+# Email Credentials and Content (will be provided as secrets in GitHub Actions)
+sender_email = "your_email@gmail.com"  # Replace with your email address
+password = "your_app_password"  # Replace with your app password
+recipient_email = "recipient_email@example.com"  # Replace with recipient email
 subject = "Automated Email from Python"
-body = "This is a test email sent every minute."
+body = "This is a test email sent at 8:30 PM."
 
-# Check if it's a new minute
-current_minute = datetime.now().minute
-if current_minute % 1 == 0:  # Every minute
+# Get current time and calculate target time
+now = datetime.now()
+target_time = now.replace(hour=20, minute=30)
+
+# Check if it's the designated time to send the email
+if target_time - now <= timedelta(seconds=60):
 
     # Create the message
     message = MIMEText(body)
@@ -24,4 +30,6 @@ if current_minute % 1 == 0:  # Every minute
         server.login(sender_email, password)
         server.sendmail(sender_email, recipient_email, message.as_string())
 
-    print("Email sent successfully at", datetime.now())
+    print("Email sent successfully at 8:30 PM!")
+else:
+    print("Not the designated time to send the email. Current time:", now)
