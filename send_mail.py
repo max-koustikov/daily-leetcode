@@ -3,9 +3,9 @@ from email.mime.text import MIMEText
 from datetime import datetime, timedelta
 
 # Email Credentials and Content (will be provided as secrets in GitHub Actions)
-sender_email = "zachhefferman@gmail.com"  # Replace with your email address
-password = "kmhv iwkx wbod pimy"  # Replace with your app password
-recipient_email = "max.koustikov@gmail.com"  # Replace with recipient email
+sender_email = "your_email@gmail.com"  # Replace with your email address
+password = "your_app_password"  # Replace with your app password
+recipient_email = "recipient_email@example.com"  # Replace with recipient email
 subject = "Automated Email from Python"
 body = "This is a test email sent at 8:30 PM."
 
