@@ -1,8 +1,8 @@
-name: Send Email Daily at 8:30 PM
+name: Send Email Every Minute
 
 on:
   schedule:
-    - cron: '30 20 * * *'  # Run every day at 8:30 PM UTC
+    - cron: '* * * * *'  # Run every minute
 
 jobs:
   send_email:
